@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DavidExamen1_1.Views.LlistaAlumnes">
+
+    <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="ID" 
+                   Style="{DynamicResource ListItemDetailStyle}" />
+            <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Name" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+            <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Center" Text="Surname1" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+            <Label Grid.Row="0" Grid.Column="3" VerticalOptions="Center" Text="Surname2" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+            <Label Grid.Row="0" Grid.Column="4" VerticalOptions="Center" Text="Poblacio" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+        </Grid>
+        <ListView x:Name="MyLIstView"
+                  ItemsSource="{Binding BindingAlumnes}"
+                  ItemTapped="Handle_ItemTapped"
+                  CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="{Binding Id}" 
+                   Style="{DynamicResource ListItemTextStyle}" />
+                            <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="{Binding Name}" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+                            <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Center" Text="{Binding Surname1}" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+                            <Label Grid.Row="0" Grid.Column="3" VerticalOptions="Center" Text="{Binding Surname2}" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+                            <Label Grid.Row="0" Grid.Column="4" VerticalOptions="Center" Text="{Binding Poblacio.Nom}" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
