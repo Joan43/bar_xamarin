@@ -23,11 +23,22 @@ namespace DavidExamen1_1.DAO
                 }
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ponlacio"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task DeleteAsync(Poblacio ponlacio)
         {
-            if (await DataBase.connection.DeleteAsync(ponlacio) <= 0)
+
+            try
             {
-                throw new Exception("No s'ha borrart");
+                await DataBase.connection.DeleteAsync(ponlacio, true);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("El registre no s'ha esborrat");
             }
         }
 
@@ -54,6 +65,14 @@ namespace DavidExamen1_1.DAO
             {
                 throw new Exception("No se ha modificat");
             }
+        }
+        public async Task<List<Poblacio>> GetAllWitchChildrenAsync(int id)
+        {
+            Task<List<Poblacio>> ll = DataBase.connection.GetAllWithChildrenAsync<Poblacio>
+                (
+                x => x.Provincia.Id == id, recursive: true
+                );
+            return await ll;
         }
     }
 }

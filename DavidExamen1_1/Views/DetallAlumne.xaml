@@ -4,11 +4,6 @@
              x:Class="DavidExamen1_1.Views.DetallAlumne">
 
     <StackLayout>
-        <!--BOTONES-->
-        <StackLayout Orientation="Horizontal" >
-            <!--<Button Text="Nuevo" Clicked="ClickedNou" HorizontalOptions="FillAndExpand"></Button>
-            <Button Text="Borra" Clicked="ClickedEsborra" HorizontalOptions="FillAndExpand"></Button>-->
-        </StackLayout>
         <!--GRID PARA INFORMACION DEL ALUMNE-->
         <Grid>
             <Grid.RowDefinitions>
@@ -41,14 +36,23 @@
             <Entry Grid.Row="3" Grid.Column="1" Margin="0.1" Text="{Binding AlumneDetall.Surname2}"></Entry>
             <Label Grid.Row="4" Grid.Column="0" Text=""></Label>
 
-            <!--PICKER PARA PROVINCIA-->
-            <Label Grid.Row="5" Grid.Column="0" Text="Provincia: "></Label>
-            <Picker Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Provincies}" ItemDisplayBinding="{Binding Nom}" 
-                    SelectedItem="{Binding AlumneDetall.Provincia}" SelectedIndexChanged="tornarPobles">
-            </Picker>
+
+            
         </Grid>
+        <!--BOTONES-->
+        <StackLayout Orientation="Horizontal" >
+            <Entry x:Name="idpoblacio"  Text="" Placeholder="id poblacio" HorizontalOptions="FillAndExpand"></Entry>
+            <Button Text="Borrar Poblacio" Clicked="ClickedBorrarPoblacioAsync" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="Nuevo" Clicked="ClickedNou" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="Borra" Clicked="ClickedEsborra" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+        <!--PICKER PARA PROVINCIA-->
+        <Label Grid.Row="5" Grid.Column="0" Text="Provincia: "></Label>
+        <Picker Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Provincies}" ItemDisplayBinding="{Binding Nom}" 
+                    SelectedItem="{Binding AlumneDetall.Provincia}" SelectedIndexChanged="tornarPobles">
+        </Picker>
         <ListView x:Name="MyLIstView3"
-                  ItemsSource="{Binding Poblaciones}"
+                  ItemsSource="{Binding PoblesTornats}"
                   CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>

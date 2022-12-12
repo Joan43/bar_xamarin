@@ -21,6 +21,11 @@ namespace DavidExamen1_1.ViewModels
         private Alumne _alumneDetall;
         public Alumne AlumneDetall { get { return _alumneDetall; } set { _alumneDetall = value; OnPropertyChanged(); } }
 
+        //LLISTA DE POBLACIONES TORNAES
+        private List<Poblacio> _poblesTornats;
+        public List<Poblacio> PoblesTornats { get { return _poblesTornats; } set { _poblesTornats = value; OnPropertyChanged(); } }
+
+
         public DetallAlumneVM(Alumne a)
         {
 
@@ -61,6 +66,26 @@ namespace DavidExamen1_1.ViewModels
             {
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// /// <exception cref="Exception">No s'ha esborrat</exception>
+        public async Task BorraProvinciaAsync(short id)
+        {
+            try
+            {
+                Poblacio pob = await ProvinciasDAO.Instance.GetAsync(id);
+                await PoblacioDAO.Instance.DeleteAsync(pob);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 }

@@ -30,11 +30,16 @@ namespace DavidExamen1_1.DAO
         /// <param name="obj"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task DeleteAsync(Provincia obj)
+        public async Task DeleteAsync(Provincia pro)
         {
-            if (await DataBase.connection.DeleteAsync(obj) <= 0)
+
+            try
             {
-                throw new Exception("No s'ha borrart");
+                await DataBase.connection.DeleteAsync(pro, true);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("El registre no s'ha esborrat");
             }
         }
         /// <summary>

@@ -1,8 +1,6 @@
 ﻿using DavidExamen1_1.Services;
 using DavidExamen1_1.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace DavidExamen1_1
 {

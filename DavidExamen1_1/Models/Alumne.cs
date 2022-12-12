@@ -1,9 +1,6 @@
-﻿using DavidExamen1_1.Models;
-using SQLite;
+﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DavidExamen1_1.Models
 {
