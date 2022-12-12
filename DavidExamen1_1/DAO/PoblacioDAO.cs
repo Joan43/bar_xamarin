@@ -23,30 +23,13 @@ namespace DavidExamen1_1.DAO
                 }
             }
         }
+
         /// <summary>
-        /// 
+        /// Obte un objecte Poblacio de la base de dades.
         /// </summary>
-        /// <param name="ponlacio"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public async Task DeleteAsync(Poblacio ponlacio)
-        {
-
-            try
-            {
-                await DataBase.connection.DeleteAsync(ponlacio, true);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("El registre no s'ha esborrat");
-            }
-        }
-
-        public async Task<List<Poblacio>> GetAllAsync()
-        {
-            return await DataBase.connection.GetAllWithChildrenAsync<Poblacio>();
-        }
-
+        /// <exception cref="Exception">No s'ha trobat el Poblacio.</exception>
         public async Task<Poblacio> GetAsync(int id)
         {
             try
@@ -59,6 +42,12 @@ namespace DavidExamen1_1.DAO
             }
         }
 
+        /// <summary>
+        /// Actualitza un objecte Poblacio de la base de dades.
+        /// </summary>
+        /// <param name="poblacio"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception">No s'ha actualitzat la Poblacio.</exception>
         public async Task SaveAsync(Poblacio poblacio)
         {
             if (await DataBase.connection.InsertOrReplaceAsync(poblacio) <= 0)
@@ -66,6 +55,31 @@ namespace DavidExamen1_1.DAO
                 throw new Exception("No se ha modificat");
             }
         }
+
+        /// <summary>
+        /// Esborra una Poblacio de la base de dades.
+        /// </summary>
+        /// <param name="poblacio"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception">No s'ha esborrat la Poblacio.</exception>
+        public async Task DeleteAsync(Poblacio poblacio)
+        {
+            if (await DataBase.connection.DeleteAsync(poblacio) <= 0)
+            {
+                throw new Exception("No s'ha borrart");
+            }
+        }
+
+        /// <summary>
+        /// Obte una llista en totes les Poblacio de la base de dades.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception">No s'ha trobat Poblacions.</exception>
+        public async Task<List<Poblacio>> GetAllAsync()
+        {
+            return await DataBase.connection.GetAllWithChildrenAsync<Poblacio>();
+        }
+
         public async Task<List<Poblacio>> GetAllWitchChildrenAsync(int id)
         {
             Task<List<Poblacio>> ll = DataBase.connection.GetAllWithChildrenAsync<Poblacio>

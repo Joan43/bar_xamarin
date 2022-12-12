@@ -22,6 +22,7 @@ namespace DavidExamen1_1.Models
 
         [ForeignKey(typeof(Poblacio))]
         public int PoblacioId { get; set; }
+
         [ManyToOne(CascadeOperations = CascadeOperation.CascadeRead)]
         public Poblacio Poblacio { get { return _poblacio;  } set { _poblacio = value; OnPropertyChanged(); } }
         private Poblacio _poblacio;

@@ -1,8 +1,6 @@
 ﻿using DavidExamen1_1.Models;
 using DavidExamen1_1.ViewModels;
 using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace DavidExamen1_1.Views
@@ -20,6 +18,31 @@ namespace DavidExamen1_1.Views
             BindingContext = vm;
             InitializeComponent();
         }
+
+        
+
+        private void ClickedNou(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClickedModificar(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClickedEsborra(object sender, EventArgs e)
+        {
+
+        }
+
+        private void getPoblacions(object sender, EventArgs e)
+        {
+
+        }
+
+
+
         /*
         private void ClickedNou(object sender, EventArgs e)
         {
@@ -49,44 +72,13 @@ namespace DavidExamen1_1.Views
 
         }
         */
-        private void tornarPobles(object sender, EventArgs e)
-        {
 
-        }
-
-        private void ClickedNou(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ClickedEsborra(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void BorrarPoblacioAsync(short id)
-        {
-            try
-            {
-                await vm.BorraPoblacioAsync(Convert.ToInt16(idpoblacio.Text));
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message, "OK");
-            }
-
-        }
-
-        private void ClickedBorrarPoblacioAsync(object sender, EventArgs e)
-        {
-            BorrarPoblacioAsync(Convert.ToInt16(idpoblacio.Text));
-        }
         /*
-private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
-{
-Poblacio poble = (Poblacio)e.Item;
-vm.AlumneDetall.Poblacio = poble;
-}
-*/
+        private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Poblacio poble = (Poblacio)e.Item;
+            vm.AlumneDetall.Poblacio = poble;
+        }
+        */
     }
 }

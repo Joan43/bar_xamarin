@@ -18,8 +18,8 @@ namespace DavidExamen1_1.Models
 
         [ForeignKey(typeof(Provincia))]
         public int ProvinciaId { get; set; }
-        [ManyToOne(CascadeOperations = CascadeOperation.CascadeRead | CascadeOperation.CascadeDelete)]
-
+        
+        [ManyToOne(CascadeOperations = CascadeOperation.CascadeRead)]
         public Provincia Provincia { get { return _provincia; } set { _provincia = value; OnPropertyChanged(); } }
         private Provincia _provincia;
 

@@ -41,18 +41,17 @@
         </Grid>
         <!--BOTONES-->
         <StackLayout Orientation="Horizontal" >
-            <Entry x:Name="idpoblacio"  Text="" Placeholder="id poblacio" HorizontalOptions="FillAndExpand"></Entry>
-            <Button Text="Borrar Poblacio" Clicked="ClickedBorrarPoblacioAsync" HorizontalOptions="FillAndExpand"></Button>
             <Button Text="Nuevo" Clicked="ClickedNou" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="Borra" Clicked="ClickedModificar" HorizontalOptions="FillAndExpand"></Button>
             <Button Text="Borra" Clicked="ClickedEsborra" HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>
         <!--PICKER PARA PROVINCIA-->
         <Label Grid.Row="5" Grid.Column="0" Text="Provincia: "></Label>
         <Picker Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Provincies}" ItemDisplayBinding="{Binding Nom}" 
-                    SelectedItem="{Binding AlumneDetall.Provincia}" SelectedIndexChanged="tornarPobles">
+                    SelectedItem="{Binding Provincia}" SelectedIndexChanged="getPoblacions">
         </Picker>
         <ListView x:Name="MyLIstView3"
-                  ItemsSource="{Binding PoblesTornats}"
+                  ItemsSource="{Binding Poblacions}"
                   CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>

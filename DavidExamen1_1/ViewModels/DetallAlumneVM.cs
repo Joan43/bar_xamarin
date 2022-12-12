@@ -15,20 +15,18 @@ namespace DavidExamen1_1.ViewModels
 
         //LLISTA DE POBLACIONES
         private List<Poblacio> _poblaciones;
-        public List<Poblacio> Poblaciones { get { return _poblaciones; } set { _poblaciones = value; OnPropertyChanged(); } }
+        public List<Poblacio> Poblacions { get { return _poblaciones; } set { _poblaciones = value; OnPropertyChanged(); } }
 
         //OBJECTE ALUMNE DE LA CLASE, QUE ENS PASARA LA LLISTA
         private Alumne _alumneDetall;
         public Alumne AlumneDetall { get { return _alumneDetall; } set { _alumneDetall = value; OnPropertyChanged(); } }
 
-        //LLISTA DE POBLACIONES TORNAES
-        private List<Poblacio> _poblesTornats;
-        public List<Poblacio> PoblesTornats { get { return _poblesTornats; } set { _poblesTornats = value; OnPropertyChanged(); } }
-
+        //PROVINCIA SELECCIONADA
+        private Provincia _provincia; 
+        public Provincia Provincia { get { return _provincia; } set { _provincia = value; OnPropertyChanged(); } }
 
         public DetallAlumneVM(Alumne a)
         {
-
             //EL ALUMNO INTERNO SERA EL DEL CONSTRCUTOR
             AlumneDetall = a;
 
@@ -41,21 +39,31 @@ namespace DavidExamen1_1.ViewModels
                 }
                 );
 
-            //LLENAMOS LA LISTA DE PROVINCIAS
+            //LLENAMOS LA LISTA DE POBLACIO
             PoblacioDAO.Instance.GetAllAsync().ContinueWith(
                 x =>
                 {
                     List<Poblacio> ll = x.Result;
-                    Poblaciones = new List<Poblacio>(ll);
+                    Poblacions = new List<Poblacio>(ll);
                 }
                 );
 
-            //Task<List<Provincia>> tprovincia = ProvinciasDAO.Instance.GetAllAsync();
-            //ObservableCollection<Provincia> Provincies = new ObservableCollection<Provincia>(tprovincia.Result);
-            //Task<List<Poblacio>> tpoblaciones = PoblacioDAO.Instance.GetAllAsync();
-            //ObservableCollection<Poblacio> Poblaciones = new ObservableCollection<Poblacio>(tpoblaciones.Result);
+            // LLENAMOS LA PROVINCIA
+            getAsync();
         }
 
+        private async Task getAsync()
+        {
+            Poblacio pob = await PoblacioDAO.Instance.GetAsync(AlumneDetall.PoblacioId);
+            Provincia = await ProvinciasDAO.Instance.GetAsync(pob.Provincia.Id);
+        }
+
+
+        /// <summary>
+        /// Borra un alumno.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task DeleteAsync()
         {
             try
@@ -68,24 +76,9 @@ namespace DavidExamen1_1.ViewModels
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// /// <exception cref="Exception">No s'ha esborrat</exception>
-        public async Task BorraProvinciaAsync(short id)
+        public async Task GetPoblacionesAsync()
         {
-            try
-            {
-                Poblacio pob = await ProvinciasDAO.Instance.GetAsync(id);
-                await PoblacioDAO.Instance.DeleteAsync(pob);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            
+
         }
     }
 }

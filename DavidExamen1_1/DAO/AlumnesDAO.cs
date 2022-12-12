@@ -10,7 +10,6 @@ namespace DavidExamen1_1.DAO
 {
     public class AlumnesDAO : IDAO<Alumne>
     {
-        // standalone = sol un objecte del tipus AlumneDAO
         private static AlumnesDAO _instance = null;
         public static AlumnesDAO Instance
         {
@@ -24,24 +23,13 @@ namespace DavidExamen1_1.DAO
                 }
             }
         }
+
         /// <summary>
-        /// Esborra alumne.
-        /// </summary>
-        /// <param name="alumne"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">No s'ha esborrat</exception>
-        public async Task DeleteAsync(Alumne alumne)
-        {
-            if (await DataBase.connection.DeleteAsync(alumne) <= 0)
-            {
-                throw new Exception("No s'ha borrart");
-            }
-        }
-        /// <summary>
-        /// Obte un objecte alumne
+        /// Obte un objecte Alumne de la base de dades.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        /// <exception cref="Exception">No s'ha trobat el Alumne.</exception>
         public async Task<Alumne> GetAsync(int id)
         {
             try
@@ -53,26 +41,43 @@ namespace DavidExamen1_1.DAO
                 throw e;
             }
         }
+
         /// <summary>
-        /// Obte tots els alumnes.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<Alumne>> GetAllAsync()
-        {
-            return await DataBase.connection.GetAllWithChildrenAsync<Alumne>();
-        }
-        /// <summary>
-        /// Actualitza un objecte alumne
+        /// Actualitza un objecte Alumne de la base de dades.
         /// </summary>
         /// <param name="alumne"></param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception">No s'ha actualitzat el Alumne.</exception>
         public async Task SaveAsync(Alumne alumne)
         {
             if (await DataBase.connection.InsertOrReplaceAsync(alumne) <= 0)
             {
                 throw new Exception("No se ha modificat");
             }
+        }
+
+        /// <summary>
+        /// Esborra un Alumne de la base de dades.
+        /// </summary>
+        /// <param name="alumne"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception">No s'ha esborrat el Alumne.</exception>
+        public async Task DeleteAsync(Alumne alumne)
+        {
+            if (await DataBase.connection.DeleteAsync(alumne) <= 0)
+            {
+                throw new Exception("No s'ha borrart");
+            }
+        }
+
+        /// <summary>
+        /// Obte una llista en tots els Alumnes de la base de dades.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception">No s'ha trobat Alumnes.</exception>
+        public async Task<List<Alumne>> GetAllAsync()
+        {
+            return await DataBase.connection.GetAllWithChildrenAsync<Alumne>();
         }
     }
 }

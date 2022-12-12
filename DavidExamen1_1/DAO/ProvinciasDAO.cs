@@ -10,7 +10,6 @@ namespace DavidExamen1_1.DAO
 {
     public class ProvinciasDAO : IDAO<Provincia>
     {
-        // standalone = sol un objecte del tipus AlumneDAO
         private static ProvinciasDAO _instance = null;
         public static ProvinciasDAO Instance
         {
@@ -24,37 +23,13 @@ namespace DavidExamen1_1.DAO
                 }
             }
         }
-        /// <summary>
-        /// Esborra provincia
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public async Task DeleteAsync(Provincia pro)
-        {
 
-            try
-            {
-                await DataBase.connection.DeleteAsync(pro, true);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("El registre no s'ha esborrat");
-            }
-        }
         /// <summary>
-        /// Obte totes les provincies
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<Provincia>> GetAllAsync()
-        {
-            return await DataBase.connection.GetAllWithChildrenAsync<Provincia>();
-        }
-        /// <summary>
-        /// Obte un objecte provincia
+        /// Obte una Provincia de la base de dades.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        /// <exception cref="Exception">No s'ha trobat la Provincia.</exception>
         public async Task<Provincia> GetAsync(int id)
         {
             try
@@ -66,8 +41,9 @@ namespace DavidExamen1_1.DAO
                 throw e;
             }
         }
+
         /// <summary>
-        /// Actualitza un objecte provincia
+        /// Actualitza un objecte Provincia de la base de dades.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -78,6 +54,30 @@ namespace DavidExamen1_1.DAO
             {
                 throw new Exception("No se ha modificat");
             }
+        }
+
+        /// <summary>
+        /// Esborra Provincia de la base de dades.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task DeleteAsync(Provincia pro)
+        {
+            if (await DataBase.connection.DeleteAsync(pro) <= 0)
+            {
+                throw new Exception("No s'ha borrart");
+            }
+        }
+
+        /// <summary>
+        /// Obte una llista en totes les Provincies de la base de dades.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception">No s'ha trobat Provincies.</exception>
+        public async Task<List<Provincia>> GetAllAsync()
+        {
+            return await DataBase.connection.GetAllWithChildrenAsync<Provincia>();
         }
     }
 }
